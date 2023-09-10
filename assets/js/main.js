@@ -58,9 +58,19 @@ const posts = [
 
 const postsList = document.getElementById('container')
 
+
+
+
+//generates posts
+
 function generatePost(posts) {
+    
 
     posts.forEach(card => {
+
+        let createDate = new Date(card.created) 
+
+        let europeDateFormat = createDate.getDate() + '-' + createDate.getMonth() + '-' +createDate.getFullYear()
 
         const cardDom = `
 
@@ -72,7 +82,7 @@ function generatePost(posts) {
                     </div>
                     <div class="post-meta__data">
                         <div class="post-meta__author">${card.author.name}</div>
-                        <div class="post-meta__time">4 mesi fa</div>
+                        <div class="post-meta__time">${europeDateFormat}</div>
                     </div>                    
                 </div>
             </div>
@@ -103,4 +113,7 @@ function generatePost(posts) {
 
 }
 
+
 generatePost(posts);
+
+
