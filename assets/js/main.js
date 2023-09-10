@@ -55,3 +55,52 @@ const posts = [
         "created": "2021-03-05"
     }
 ];
+
+const postsList = document.getElementById('container')
+
+function generatePost(posts) {
+
+    posts.forEach(card => {
+
+        const cardDom = `
+
+        <div class="post">
+            <div class="post__header">
+                <div class="post-meta">                    
+                    <div class="post-meta__icon">
+                        <img class="profile-pic" src="https://unsplash.it/300/300?image=15" alt="${card.author.name}">                    
+                    </div>
+                    <div class="post-meta__data">
+                        <div class="post-meta__author">${card.author.name}</div>
+                        <div class="post-meta__time">4 mesi fa</div>
+                    </div>                    
+                </div>
+            </div>
+            <div class="post__text">${card.content}</div>
+            <div class="post__image">
+                <img src="${card.media}" alt="">
+            </div>
+            <div class="post__footer">
+                <div class="likes js-likes">
+                    <div class="likes__cta">
+                        <a class="like-button  js-like-button" href="#" data-postid="${card.id}">
+                            <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                            <span class="like-button__label">Mi Piace</span>
+                        </a>
+                    </div>
+                    <div class="likes__counter">
+                        Piace a <b id="like-counter-1" class="js-likes-counter">80</b> persone
+                    </div>
+                </div> 
+            </div>            
+        </div>
+
+        `;
+
+        postsList.insertAdjacentHTML('beforeend', cardDom)
+        
+    });
+
+}
+
+generatePost(posts);
