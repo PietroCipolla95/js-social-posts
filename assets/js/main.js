@@ -1,3 +1,5 @@
+
+
 const posts = [
     {
         "id": 1,
@@ -56,12 +58,10 @@ const posts = [
     }
 ];
 
+//dom elements where posts get created
 const postsList = document.getElementById('container')
 
-
-
 //generates posts
-
 function generatePost(posts) {
     
 
@@ -133,8 +133,6 @@ function generatePost(posts) {
     });
 
 }
-
-
 
 //generates posts in html
 generatePost(posts);
