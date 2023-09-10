@@ -60,7 +60,6 @@ const postsList = document.getElementById('container')
 
 
 
-
 //generates posts
 
 function generatePost(posts) {
@@ -68,17 +67,38 @@ function generatePost(posts) {
 
     posts.forEach(card => {
 
+        //european format date
         let createDate = new Date(card.created) 
-
         let europeDateFormat = createDate.getDate() + '-' + createDate.getMonth() + '-' +createDate.getFullYear()
 
+
+        //function to generate profile pic
+        function profilePic() {
+
+            const nameSplit = card.author.name.split(' ');
+            const profileLetters = nameSplit[0].charAt(0) + ' ' + nameSplit[1].charAt(0);
+
+            if (card.author.image == null) {
+        
+                return `<div><span>${profileLetters}</span></div>`
+                
+            } else {
+        
+                return `<img class="profile-pic" src="${card.author.image}" alt="${card.author.name}"></img>`
+                
+            }
+            
+        }
+
+
+        //markup creation
         const cardDom = `
 
         <div class="post">
             <div class="post__header">
                 <div class="post-meta">                    
                     <div class="post-meta__icon">
-                        <img class="profile-pic" src="https://unsplash.it/300/300?image=15" alt="${card.author.name}">                    
+                        ${profilePic()}                   
                     </div>
                     <div class="post-meta__data">
                         <div class="post-meta__author">${card.author.name}</div>
@@ -107,6 +127,7 @@ function generatePost(posts) {
 
         `;
 
+        //inserts posts in dom
         postsList.insertAdjacentHTML('beforeend', cardDom)
         
     });
@@ -114,6 +135,8 @@ function generatePost(posts) {
 }
 
 
+
+//generates posts in html
 generatePost(posts);
 
 
