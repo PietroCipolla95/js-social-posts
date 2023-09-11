@@ -69,7 +69,7 @@ function generatePost(posts) {
 
         //european format date
         let createDate = new Date(card.created) 
-        let europeDateFormat = createDate.getDate() + '-' + createDate.getMonth() + '-' +createDate.getFullYear()
+        let europeDateFormat = createDate.getDate() + '-' + createDate.getMonth() + '-' + createDate.getFullYear()
 
 
         //function to generate profile pic
@@ -119,7 +119,7 @@ function generatePost(posts) {
                         </a>
                     </div>
                     <div class="likes__counter">
-                        Piace a <b id="like-counter-1" class="js-likes-counter">80</b> persone
+                        Piace a <b id="like-counter-1" class="js-likes-counter">${card.likes}</b> persone
                     </div>
                 </div> 
             </div>            
@@ -136,5 +136,49 @@ function generatePost(posts) {
 
 //generates posts in html
 generatePost(posts);
+
+
+const likeButtons = document.querySelectorAll('.js-like-button');
+const likeCounters = document.querySelectorAll('.js-likes-counter');
+
+
+//function for likes counters and buttons
+for (let i = 0; i < likeButtons.length; i++) {
+    
+    const element = likeButtons[i];
+
+    element.addEventListener('click', function(e) {
+
+        //makes page not refresh
+        e.preventDefault();
+
+        if (!element.classList.contains('like-button--liked')) {
+
+            element.classList.add('like-button--liked');
+
+            const thisCounter = likeCounters[i];
+            const number = parseInt(thisCounter.innerHTML);
+            thisCounter.innerHTML = number + 1;
+
+            const likedPost = posts[i];
+            likedPost.likes++;
+
+            
+        } else {
+
+            element.classList.remove('like-button--liked');
+
+            const thisCounter = likeCounters[i];
+            const number = parseInt(thisCounter.innerHTML);
+            thisCounter.innerHTML = number - 1;
+
+            const likedPost = posts[i];
+            likedPost.likes--;
+
+        }
+        
+    })
+    
+}
 
 
